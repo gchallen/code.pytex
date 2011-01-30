@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+
+import lib
+import sys, re, os
+from optparse import OptionParser
+
+parser = OptionParser()
+parser.add_option("-o", "--overonly", dest="overonly", action="store_true", default=False, help="only display sections over the word count (default False)")
+(options, args) = parser.parse_args()
+
+if len(args) < 2:
+  sys.exit(1)
+
+if args[0] == "-":
+  inlines = sys.stdin.read()
+else:
+  try:
+    inlines = open(args[0], "r").read()
+  except:
+    sys.exit(1)
+
+if args[1] == "-":
+  outfile = sys.stdout
+else:
+  try:
+    outfile = open(args[1], "w")
+  except:
+    sys.exit(1)
+
+clean = re.compile(r'<wc:start description="([^"]*)" max=(\d+)>(.*?)<wc:end>', re.S)
+index = 1
+for f in clean.finditer(inlines):
+  description = f.group(1)
+  max = int(f.group(2))
+  count = len(lib.clean(f.group(3)).split())
+  if not options.overonly or count > max:
+    if count > max:
+      char = "*"
+    else:
+      char = " "
+    print "%c %2d. M:%3d C:%3d %s" % (char, index, max, count, description)
+  index += 1
+clean = re.compile(r'<cc:start description="([^"]*)" max=(\d+)>(.*?)<cc:end>', re.S)
+index = 1
+for f in clean.finditer(inlines):
+  description = f.group(1)
+  max = int(f.group(2))
+  count = len(lib.clean(f.group(3)).strip())
+  if not options.overonly or count > max:
+    if count > max:
+      char = "*"
+    else:
+      char = " "
+    print "%c %2d. M:%3d C:%3d %s" % (char, index, max, count, description)
+  index += 1

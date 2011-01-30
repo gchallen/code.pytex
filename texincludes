@@ -1,0 +1,97 @@
+#!/usr/bin/env python
+
+import sys,re,glob,StringIO,os
+from optparse import OptionParser
+
+parser = OptionParser()
+(options, args) = parser.parse_args()
+
+if len(args) < 1:
+  sys.exit(1)
+
+files = glob.glob("*.tex")
+
+if len(files) == 0:
+  sys.exit(0)
+
+try:
+  outfile = open(args[0], "w")
+except:
+  sys.exit(1)
+
+docfile = re.compile(r"^[^%]*?\\begin\{document\}", re.M)
+inputs = re.compile(r"^[^%]*?\\input{(.*)}", re.M)
+bibs = re.compile(r"^[^%]*?\\bibliography\{(.*)\}", re.M)
+citations = re.compile(r"^[^%]*?\\(no)?cite", re.M)
+graphics = re.compile(r"^[^%]*?\\includegraphics(\[.*?\])?\{(.*?)\}", re.M)
+withpdf = re.compile(r"^.*\.pdf$")
+
+output = StringIO.StringIO()
+allnames = []
+
+for f in files:
+  lines = open(f, "r").read()
+  if not docfile.search(lines):
+    continue
+  input_files = []
+  bib_files = []
+  graphic_files = []
+  toprocess = [f]
+
+  docitations = False
+  fbasename = os.path.splitext(f)[0]
+
+  while len(toprocess) > 0:
+    try:
+      lines = open(toprocess[0], "r").read()
+      if citations.search(lines):
+        docitations = True
+      i = inputs.finditer(lines)
+      for m in i:
+        toprocess.append(m.group(1))
+      b = bibs.finditer(lines)
+      for m in b:
+        allbibs = m.group(1).split(",")
+        for bib in allbibs:
+          bib_files.append(bib + ".bib")
+      g = graphics.finditer(lines)
+      for m in g:
+        if withpdf.match(m.group(2)):
+          graphic_files.append(m.group(2))
+        else:
+          graphic_files.append(m.group(2) + ".pdf")
+    except:
+      True
+    input_files.append(toprocess.pop(0))
+  
+  all_files = input_files
+  if docitations:
+    all_files.append(fbasename + ".blg")
+  all_files.extend(graphic_files) 
+  for file in args[1:]:
+    all_files.append(file)
+  allnames.append(fbasename)
+
+  print >>output, "%s : LOG := %s.log" % (fbasename, fbasename)
+  print >>output, "%s : PDF := %s.pdf" % (fbasename, fbasename)
+  print >>output, "%s : $(START) %s.pdf $(END)" % (fbasename, fbasename)
+  print >>output, "%s.ps : %s.pdf"
+  print >>output, "%s.pdf : %s" % (fbasename, " ".join(all_files))
+  if docitations:
+    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tbibtex %s"  % (fbasename)
+    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "%s.bbl %s.blg : %s" % (fbasename, fbasename, " ".join(bib_files))
+    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tbibtex %s"  % (fbasename)
+    print >>output, "\tpdflatex %s" % (f)
+  else:
+    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tpdflatex %s" % (f)
+    
+print >>outfile, output.getvalue(),
+print >>outfile, "PDFS = %s" % (" ".join([n + ".pdf" for n in allnames]))
+print args[0]
