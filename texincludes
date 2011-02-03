@@ -25,6 +25,9 @@ bibs = re.compile(r"^[^%]*?\\bibliography\{(.*)\}", re.M)
 citations = re.compile(r"^[^%]*?\\(no)?cite", re.M)
 graphics = re.compile(r"^[^%]*?\\includegraphics(\[.*?\])?\{(.*?)\}", re.M)
 withpdf = re.compile(r"^.*\.pdf$")
+nobibtex = re.compile(r"^% !NOBIBTEX!", re.M)
+
+nobibtexs = {}
 
 output = StringIO.StringIO()
 allnames = []
@@ -39,11 +42,16 @@ for f in files:
   toprocess = [f]
 
   docitations = False
+  dontbibtex = False
   fbasename = os.path.splitext(f)[0]
 
   while len(toprocess) > 0:
     try:
       lines = open(toprocess[0], "r").read()
+      if nobibtex.search(lines):
+        nobibtexs[toprocess[0]] = True
+      else:
+        nobibtexs[toprocess[0]] = False
       if citations.search(lines):
         docitations = True
       i = inputs.finditer(lines)
@@ -65,7 +73,7 @@ for f in files:
     input_files.append(toprocess.pop(0))
   
   all_files = input_files
-  if docitations:
+  if docitations and not nobibtexs[f]:
     all_files.append(fbasename + ".blg")
   all_files.extend(graphic_files) 
   for file in args[1:]:
@@ -77,7 +85,7 @@ for f in files:
   print >>output, "%s : $(START) %s.pdf $(END)" % (fbasename, fbasename)
   print >>output, "%s.ps : %s.pdf"
   print >>output, "%s.pdf : %s" % (fbasename, " ".join(all_files))
-  if docitations:
+  if docitations and not nobibtexs[f]:
     print >>output, "\tpdflatex %s" % (f)
     print >>output, "\tbibtex %s"  % (fbasename)
     print >>output, "\tpdflatex %s" % (f)
@@ -95,3 +103,4 @@ for f in files:
 print >>outfile, output.getvalue(),
 print >>outfile, "PDFS = %s" % (" ".join([n + ".pdf" for n in allnames]))
 print args[0]
+print nobibtexs
