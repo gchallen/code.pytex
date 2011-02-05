@@ -102,5 +102,3 @@ for f in files:
     
 print >>outfile, output.getvalue(),
 print >>outfile, "PDFS = %s" % (" ".join([n + ".pdf" for n in allnames]))
-print args[0]
-print nobibtexs
