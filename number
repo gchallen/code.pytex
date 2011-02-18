@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+
+from optparse import OptionParser
+import sys, subprocess, time, re, shlex, tempfile, os
+
+parser = OptionParser()
+parser.add_option("-s", "--skip", dest="skip", type=int, default=0, help="number of initial pages to skip (default 0)")
+parser.add_option("-a", "--avoid", dest="avoid", type=str, default="", help="pages to avoid, comma separated (default \"\")")
+(options, args) = parser.parse_args()
+
+avoid = options.avoid.split(",")
+avoid = [int(a) for a in avoid]
+
+infile = args[0]
+outfile = args[1]
+ininfo = subprocess.Popen("pdfinfo \"%s\"" % (infile), shell=True, stdout=subprocess.PIPE).communicate()[0]
+origpages = int(re.search(r'Pages:\s+(\d+)', ininfo).group(1))
+numpages = origpages - options.skip
+
+latexstart = r'''\documentclass[11pt]{memoir}
+\usepackage{times}
+\maxdeadcycles=1000
+\setstocksize{11in}{8.5in}
+\settrimmedsize{11in}{8.5in}{*}
+\settrims{0pt}{0pt}
+\setlrmarginsandblock{1in}{1in}{*}
+\setulmarginsandblock{1in}{1in}{*}
+\setheadfoot{0.1pt}{36pt}
+\setmarginnotes{0.5cm}{1.5cm}{0.1cm}
+\checkandfixthelayout
+\copypagestyle{number}{headings}
+\makeoddhead{number}{}{}{}
+\makeevenhead{number}{}{}{}
+\makeoddfoot{number}{}{\thepage}{}
+\makeevenfoot{number}{}{\thepage}{}
+\begin{document}
+\pagestyle{number}'''
+
+latexend = r'''\end{document}'''
+
+startdir = os.getcwd()
+tempdir = tempfile.mkdtemp()
+subprocess.call("cp \"%s\" \"%s\"/A.pdf" % (infile, tempdir), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+os.chdir(tempdir)
+latexfile = open('B.tex', 'w')
+print >>latexfile, latexstart
+for a in range(numpages):
+  print >>latexfile, r'''\mbox{}
+\newpage'''
+print >>latexfile, latexend
+latexfile.close()
+print os.getcwd()
+subprocess.Popen("pdflatex --interaction=nonstopmode B.tex", shell=True, stdout=subprocess.PIPE).communicate()[0]
+subprocess.Popen(r"pdftk A.pdf burst output A%03d.pdf", shell=True, stdout=subprocess.PIPE).communicate()[0]
+subprocess.Popen(r"pdftk B.pdf burst output B%03d.pdf", shell=True, stdout=subprocess.PIPE).communicate()[0]
+Boffset = options.skip
+for Aindex in range(origpages):
+  Aindex += 1
+  if (Aindex <= Boffset) or ((Aindex - Boffset) in avoid):
+    subprocess.Popen(r"cp A%03d.pdf C%03d.pdf" % (Aindex, Aindex), shell=True, stdout=subprocess.PIPE).communicate()[0]
+  else:
+    subprocess.Popen(r"pdftk A%03d.pdf background B%03d.pdf output C%03d.pdf" % (Aindex, Aindex - Boffset, Aindex), shell=True, stdout=subprocess.PIPE).communicate()[0]
+subprocess.Popen(r"pdftk %s output D.pdf" % (' '.join(["C%03d.pdf" % (i + 1) for i in range(origpages)])), shell=True, stdout=subprocess.PIPE).communicate()[0]
+subprocess.call("cp D.pdf \"%s\"/\"%s\"" % (startdir, outfile), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+os.chdir(startdir)
