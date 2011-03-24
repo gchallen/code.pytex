@@ -1,0 +1,76 @@
+SHELL := /bin/bash
+
+# 16 Nov 2010 : GWA : Watch all .tex files below this directory to determine
+#               when to rebuild the dependencies.
+
+TEXFILES = $(shell find . -name "*.tex")
+
+# 16 Nov 2010 : GWA : Kind of a nasty hack, but we use a special Python
+# 							script to regenerate make rules which are then loaded by the
+# 							include below. This was the least nasty way of getting
+# 							complex Latex dependencies to rebuild properly, while also
+# 							enabling/disabling Bibtex as needed.
+
+.deps: $(TEXFILES)
+	./bin/texincludes .deps $(CLASS)
+include .deps
+
+%.ps : %.pdf
+	acroread -toPostScript $<
+
+allclean: rulesclean
+	@/bin/rm -f .deps
+	
+rulesclean:
+	@/bin/rm -f *.dvi *.aux *.ps *~ *.log *.lot *.lof *.toc *.blg *.bbl url.sty *.out *.bak $(PDFS)
+
+# 16 Nov 2010 : GWA : Special dummy targets below.
+
+xxxnote:
+	@echo "\\newcommand{\\XXXnote}[1]{\\textcolor{red}{\\bfseries XXX: #1}}" > .xxxnote-new
+	@if [ -n "`diff -N 2>/dev/null .xxxnote .xxxnote-new`" ]; then\
+		mv .xxxnote-new .xxxnote; \
+		else\
+		rm -f .xxxnote-new; \
+		fi
+
+noxxxnote:
+	@echo "\\newcommand{\\XXXnote}[1]{}" > .xxxnote-new
+	@if [ -n "`diff -N 2>/dev/null .xxxnote .xxxnote-new`" ]; then\
+		mv .xxxnote-new .xxxnote; \
+		else\
+		rm -f .xxxnote-new; \
+		fi
+
+.embed.pdf: $(PDF)
+	gs -dSAFER -dNOPLATFONTS -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=letter -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.4 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=.embed.pdf -f $(PDF)
+	@cp .embed.pdf $(PDF)
+
+embed: .embed.pdf
+
+MISSINGREFERENCES = $(strip $(shell grep Ref $(LOG) | awk '{print substr($$4, 2, length($$4) - 2)}'))
+MISSINGCITATIONS = $(strip $(shell grep Cit $(LOG) | awk '{print substr($$4, 2, length($$4) - 2)}'))
+missing:
+	@if [ "$(MISSINGREFERENCES)" != "" ]; then\
+		echo "-------------------------------------------------------------";\
+		echo "Missing references:";\
+		echo "-------------------------------------------------------------";\
+		echo $(MISSINGREFERENCES);\
+		fi
+	@if [ "$(MISSINGCITATIONS)" != "" ]; then\
+		echo "-------------------------------------------------------------";\
+		echo "Missing citations:";\
+		echo "-------------------------------------------------------------";\
+		echo $(MISSINGCITATIONS);\
+		fi
+
+missing-fail: missing
+	@if [ "$(MISSINGREFERENCES)" != "" ]; then false; fi
+	@if [ "$(MISSINGCITATIONS)" != "" ]; then false; fi
+
+pages: $(PDF)
+	@pdfinfo $(PDF) 2>/dev/null | grep "Pages" | awk '{print "$(PDF)", $$2;}'
+
+# 16 Nov 2010 : GWA : Phony targets.
+
+.PHONY : pages rulesclean missing-fail missing xxxnote noxxxnote clean all wc
