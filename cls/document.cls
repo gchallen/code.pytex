@@ -75,6 +75,11 @@
   \def\shortciteA{\def\citeauthoryear##1##2##3{##2}\@internalcite}
   \def\citeyear{\def\citeauthoryear##1##2##3{##3}\@internalcite}
 
+\newlength{\lefttitle}
+\newlength{\righttitle}
+\setlength{\lefttitle}{0.75\textwidth}
+\setlength{\righttitle}{0.2\textwidth}
+
 \makechapterstyle{title}{%
   \renewcommand{\chapterheadstart}{}
   \renewcommand{\printchaptername}{} 
@@ -82,13 +87,14 @@
   \renewcommand{\printchapternum}{} 
   \renewcommand{\afterchapternum}{} 
   \renewcommand{\printchaptertitle}[1]{
-\noindent\begin{minipage}[t]{0.8\textwidth}
+\noindent\begin{minipage}[t]{\lefttitle}
 \vspace{0pt}
 \raggedright
 \Large\scshape{##1}
 \vspace*{0.10in}
 \end{minipage}
-\begin{minipage}[t]{0.19\textwidth}
+\hfill
+\begin{minipage}[t]{\righttitle}
 \vspace{0pt}
 \raggedleft
 {\small \scshape \today}
@@ -140,7 +146,6 @@
   {\end{list}} 
 
 \tightlists
-\firmlists
 \renewcommand{\bibname}{References}
 \renewcommand{\thetable}{\arabic{table}}
 \newenvironment{indentpar}[1]{
@@ -161,33 +166,3 @@
 \copypagestyle{emptydocument}{document}
 \makeoddfoot{emptydocument}{}{}{}
 \makeevenfoot{emptydocument}{}{}{}
-
-\newenvironment{changemargin}[2]{%
-	\begin{list}{}{%
-		\setlength{\topsep}{0pt}%
-		\setlength{\leftmargin}{#1}%
-		\setlength{\rightmargin}{#2}%
-		\setlength{\listparindent}{\parindent}%
-		\setlength{\itemindent}{\parindent}%
-		\setlength{\parsep}{\parskip}%
-		}%
-	\item[]}{\end{list}}
-
-\newcommand{\doublespace}{\vspace{1.6ex}}
-\newcommand{\dialog}[2]{%
-	\doublespace%
-	\hskip 3.0in\textsc{#1}\par%
-	\nobreak
-	\extramarks{}{}
-	\nobreak
-	#2
-	\extramarks{\textsc{#1}(Continued)}{}
-}
-
-\newcommand{\stage}[1]{%
-	\doublespace
-	\begin{changemargin}{2in}{0in}
-		% \extramarks{}{(more)}%
-		(#1)%
-	\end{changemargin}
-}
