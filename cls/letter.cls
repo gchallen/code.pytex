@@ -105,7 +105,6 @@
   {\end{list}} 
 
 \tightlists
-\firmlists
 \renewcommand{\bibname}{References}
 \renewcommand{\thetable}{\arabic{table}}
 \newenvironment{indentpar}[1]{
