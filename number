@@ -49,7 +49,6 @@ for a in range(numpages):
 \newpage'''
 print >>latexfile, latexend
 latexfile.close()
-print os.getcwd()
 subprocess.Popen("pdflatex --interaction=nonstopmode B.tex", shell=True, stdout=subprocess.PIPE).communicate()[0]
 subprocess.Popen(r"pdftk A.pdf burst output A%03d.pdf", shell=True, stdout=subprocess.PIPE).communicate()[0]
 subprocess.Popen(r"pdftk B.pdf burst output B%03d.pdf", shell=True, stdout=subprocess.PIPE).communicate()[0]
