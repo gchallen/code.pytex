@@ -8,7 +8,7 @@
 \RequirePackage{calc}
 \RequirePackage{mathpazo}
 \RequirePackage{ulem}
-\ProvidesClass{letter}[2010/10/22 GWA White Paper Class]
+\ProvidesClass{ubletter}[2010/10/22 GWA White Paper Class]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions
 \LoadClass[onecolumn,oneside,final]{memoir}
@@ -34,7 +34,7 @@
 % \setlength{\textwidth}{\paperwidth - 2in}
 % \setlength{\textheight}{\paperheight - 2in}
 
-%\settypeblocksize{9in}{6.5in}{*}
+%\settypeblocksize{8in}{6.5in}{*}
 
 % 22 Oct 2010 : GWA : Used to be:
 % \setlength{\oddsidemargin}{1in}
@@ -47,7 +47,7 @@
 % \setlength{\headheight}{0pt}
 % \setlength{\headsep}{0pt}
 
-\setulmarginsandblock{1in}{1in}{*}
+\setulmarginsandblock{1.5in}{1in}{*}
 
 % 22 Oct 2010 : GWA : Used to be:
 % \setlength{\footskip}{36pt}
@@ -127,3 +127,14 @@
 \makeevenhead{emptyletter}{}{}{}
 \makeoddfoot{emptyletter}{}{}{}
 \makeevenfoot{emptyletter}{}{}{}
+
+\makeatletter
+\newcommand\BackgroundPicture[1]{%
+   \setlength{\unitlength}{1pt}%
+   \put(0,\strip@pt\paperheight){%
+   \parbox[t][\paperheight]{\paperwidth}{%
+     \vfill
+     \centering\includegraphics{#1}
+     \vfill
+}}} %
+\makeatother
