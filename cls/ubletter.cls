@@ -47,7 +47,7 @@
 % \setlength{\headheight}{0pt}
 % \setlength{\headsep}{0pt}
 
-\setulmarginsandblock{1.5in}{1in}{*}
+\setulmarginsandblock{1.5in}{1.25in}{*}
 
 % 22 Oct 2010 : GWA : Used to be:
 % \setlength{\footskip}{36pt}
