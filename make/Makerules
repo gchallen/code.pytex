@@ -12,7 +12,7 @@ TEXFILES = $(shell find . -name "*.tex")
 # 							enabling/disabling Bibtex as needed.
 
 .deps: $(TEXFILES)
-	$(PYTEX)/texincludes .deps $(CLASS)
+	$(PYTEX)/bin/texincludes .deps $(CLASS)
 include .deps
 
 %.ps : %.pdf
