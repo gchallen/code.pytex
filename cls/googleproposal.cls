@@ -8,7 +8,7 @@
 \RequirePackage{calc}
 \RequirePackage{mathpazo}
 \RequirePackage{ulem}
-\ProvidesClass{nsfcnsproposal}[2010/10/22 GWA NSF CNS Proposal Class]
+\ProvidesClass{googleproposal}[2010/10/22 GWA Google Proposal Class]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions
 \LoadClass[onecolumn,oneside,final]{memoir}
@@ -104,10 +104,9 @@
 \begin{minipage}[t]{\righttitle}
 \vspace{0pt}
 \raggedleft
-{\small \scshape NSF Proposal\\
+{\small \scshape Google Research Proposal
 \submissiondate}
 \end{minipage}
-{\large\theauthors}
 }
   \renewcommand{\afterchaptertitle}{\vspace{0.5\onelineskip} \hrule \vspace{0.3\onelineskip}}
 } 
@@ -130,14 +129,14 @@
 
 % 26 Oct 2010 : GWA : Section styles.
 \setsecnumformat{\csname the#1\endcsname\space---\space}
-\setbeforesecskip{-2.0ex plus -0.5ex minus -0.2ex}
-\setaftersecskip{1.0ex plus 0.2ex minus 0.1ex}
+\setbeforesecskip{-1.0ex plus -0.5ex minus -0.2ex}
+\setaftersecskip{0.35ex plus 0.2ex minus 0.1ex}
 
 % 26 Oct 2010 : GWA : Subsection styles.
 \setcounter{secnumdepth}{2}
 \setsubsecheadstyle{\bfseries\raggedright}
 \setbeforesubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
-\setaftersubsecskip{0.3ex plus -0.2ex minus -0.2ex}
+\setaftersubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
 
 \newcounter{flushenumbfenum}
 \newenvironment{flushenumbf}{
@@ -248,6 +247,13 @@
   {\end{center}
   \restoretrivseps}
 
+\newenvironment{tightframed}{
+  \savetrivseps
+  \zerotrivseps
+  \begin{framed}}
+  {\end{framed}
+  \restoretrivseps}
+
 \newenvironment{tightcentertitle}{
   \savetrivseps
   \zerotrivseps
@@ -277,3 +283,23 @@
 \captiontitlefont{\small}
 \nonzeroparskip
 \setlength{\parindent}{0pt}
+\makechapterstyle{empty}{%
+  \renewcommand{\chapterheadstart}{} 
+  \renewcommand{\printchaptername}{} 
+  \renewcommand{\chapternamenum}{} 
+  \renewcommand{\printchapternum}{} 
+  \renewcommand{\afterchapternum}{} 
+  \renewcommand{\printchaptertitle}[1]{}
+  \renewcommand{\afterchaptertitle}{}
+} 
+\copypagestyle{proposal}{headings}
+%\addtopsmarks{whitepaper}{}{%
+%\nouppercaseheads
+%\createmark{chapter}{left}{nonumber}{}{}}
+\makeoddhead{proposal}{{\scshape \small \shorttitle}}{}{{\scshape \small \shortauthors}}
+\makeevenhead{proposal}{{\scshape \small \shorttitle}}{}{{\scshape \small \shortauthors}}
+\makeoddfoot{proposal}{}{\thepage}{}
+\makeevenfoot{proposal}{}{\thepage}{}
+
+\makeevenfoot{empty}{}{}{}
+\makeoddfoot{empty}{}{}{}

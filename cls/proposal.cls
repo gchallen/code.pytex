@@ -4,16 +4,16 @@
 %               proposalnsf.cls file downloaded from here:
 % http://www-pord.ucsd.edu/~sgille/how_to/proposal_prep.html
 
-\RequirePackage{threeparttable}
 \RequirePackage{color}
 \RequirePackage{calc}
 \RequirePackage{mathpazo}
 \RequirePackage{ulem}
-\ProvidesClass{whitepaper}[2010/10/22 GWA White Paper Class]
+\ProvidesClass{proposal}[2010/10/22 GWA White Paper Class]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions
 \LoadClass[onecolumn,oneside,final]{memoir}
 \RequirePackage{datetime}
+\RequirePackage{threeparttable}
 
 % 22 Oct 2010 : GWA : Set up simple chapter headings.
 
@@ -73,28 +73,27 @@
 
 \newlength{\lefttitle}
 \newlength{\righttitle}
-\setlength{\lefttitle}{0.75\textwidth}
-\setlength{\righttitle}{0.2\textwidth}
+\setlength{\lefttitle}{0.8\textwidth}
+\setlength{\righttitle}{0.18\textwidth}
 
 \mmddyyyydate
-\makechapterstyle{proposal}{%
+\makechapterstyle{title}{%
   \renewcommand{\chapterheadstart}{}
   \renewcommand{\printchaptername}{} 
   \renewcommand{\chapternamenum}{} 
   \renewcommand{\printchapternum}{} 
   \renewcommand{\afterchapternum}{} 
   \renewcommand{\printchaptertitle}[1]{
-\noindent\begin{minipage}[t]{\lefttitle}
+\noindent\begin{minipage}[t]{0.7\textwidth}
 \vspace{0pt}
 \raggedright
 \Large\scshape\MakeUppercase{##1}
-\vspace*{0.10in}
+\vspace*{0.15in}
 \end{minipage}
-\hfill
-\begin{minipage}[t]{\righttitle}
+\begin{minipage}[t]{0.29\textwidth}
 \vspace{0pt}
 \raggedleft
-{\small \scshape \whitepapername\\
+{\small \scshape \proposaltitle\\ 
 \submissiondate}
 \end{minipage}
 {\large\theauthors}
@@ -138,6 +137,7 @@
      \setlength{\labelwidth}{0pt}
      \setlength{\itemindent}{0.5em}
      \setlength{\labelsep}{0.5em}
+     \setlength{\parskip}{0.5em}
      \usecounter{flushenumbfenum}}
   {\end{list}} 
 
@@ -172,3 +172,23 @@
 \makeevenfoot{chapter}{}{}{}
 \makeoddhead{chapter}{}{}{}
 \makeevenhead{chapter}{}{}{}
+\makechapterstyle{empty}{%
+  \renewcommand{\chapterheadstart}{} 
+  \renewcommand{\printchaptername}{} 
+  \renewcommand{\chapternamenum}{} 
+  \renewcommand{\printchapternum}{} 
+  \renewcommand{\afterchapternum}{} 
+  \renewcommand{\printchaptertitle}[1]{}
+  \renewcommand{\afterchaptertitle}{}
+} 
+\makechapterstyle{proposal}{%
+  \renewcommand{\chapterheadstart}{} 
+  \renewcommand{\printchaptername}{} 
+  \renewcommand{\chapternamenum}{} 
+  \renewcommand{\printchapternum}{} 
+  \renewcommand{\afterchapternum}{} 
+  \renewcommand{\printchaptertitle}[1]{%
+    \Large\scshape\MakeUppercase{##1}
+  } 
+  \renewcommand{\afterchaptertitle}{\vspace{0.5\onelineskip} \hrule \vspace{0.5\onelineskip}}
+} 
