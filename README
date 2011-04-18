@@ -1,3 +1,6 @@
+To use, create a PYTEX environment variable and point it at the directory
+where you install these files.
+
 This contains a combined Python-Latex build system useful for generating
 scientific documents.
 
