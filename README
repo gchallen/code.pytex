@@ -1,0 +1,16 @@
+This contains a combined Python-Latex build system useful for generating
+scientific documents.
+
+bin/ contains useful Python tools for generating and building Latex
+documents.
+
+cls/ contains useful class files for NSF proposals, letters, etc. Most of
+these are based on the Memoir Latex package.
+
+make/ contains a Make system designed to be used with these Python tools.
+
+skel/ contains a set of example directories using each of the class files in
+cls/.
+
+docs/ contains the Memoir Latex package and a reminder about how to write NSF
+broader impact sections.
