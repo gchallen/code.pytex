@@ -1,0 +1,16 @@
+\input{./include/start.tex}
+
+\def\thetitle{Title}
+\def\shorttitle{Short Title}
+\def\theauthors{Geoffrey Challen}
+\def\shortauthors{Challen}
+
+\begin{document}
+\pagestyle{document}
+\thispagestyle{emptydocument}
+\pagenumbering{arabic}
+\chapterstyle{title}
+\chapter{\thetitle}
+\chapterstyle{document}
+\input{content.tex}
+\end{document}
