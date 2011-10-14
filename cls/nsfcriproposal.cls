@@ -8,7 +8,7 @@
 \RequirePackage{calc}
 \RequirePackage{mathpazo}
 \RequirePackage{ulem}
-\ProvidesClass{nsfcnsproposal}[2010/10/22 GWA NSF CNS Proposal Class]
+\ProvidesClass{nsfcriproposal}[2010/10/22 GWA NSF CRI Proposal Class]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions
 \LoadClass[onecolumn,oneside,final]{memoir}
@@ -134,10 +134,12 @@
 \setaftersecskip{1.0ex plus 0.2ex minus 0.1ex}
 
 % 26 Oct 2010 : GWA : Subsection styles.
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{3}
 \setsubsecheadstyle{\bfseries\raggedright}
 \setbeforesubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
 \setaftersubsecskip{0.3ex plus -0.2ex minus -0.2ex}
+\setbeforesubsubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
+\setaftersubsubsecskip{-0.3ex plus -0.2ex minus -0.2ex}
 
 \newcounter{flushenumbfenum}
 \newenvironment{flushenumbf}{
