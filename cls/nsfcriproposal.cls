@@ -130,15 +130,15 @@
 
 % 26 Oct 2010 : GWA : Section styles.
 \setsecnumformat{\csname the#1\endcsname\space---\space}
-\setbeforesecskip{-2.0ex plus -0.5ex minus -0.2ex}
-\setaftersecskip{1.0ex plus 0.2ex minus 0.1ex}
+\setbeforesecskip{-2.5ex plus -0.5ex minus -0.2ex}
+\setaftersecskip{1.5ex plus 0.2ex minus 0.1ex}
 
 % 26 Oct 2010 : GWA : Subsection styles.
 \setcounter{secnumdepth}{3}
 \setsubsecheadstyle{\bfseries\raggedright}
-\setbeforesubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
-\setaftersubsecskip{0.3ex plus -0.2ex minus -0.2ex}
-\setbeforesubsubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
+\setbeforesubsecskip{-1.5ex plus -0.3ex minus -0.3ex}
+\setaftersubsecskip{1.5ex plus -0.3ex minus -0.3ex}
+\setbeforesubsubsecskip{-1.0ex plus -0.2ex minus -0.2ex}
 \setaftersubsubsecskip{-0.3ex plus -0.2ex minus -0.2ex}
 
 \newcounter{flushenumbfenum}
@@ -279,3 +279,6 @@
 \captiontitlefont{\small}
 \nonzeroparskip
 \setlength{\parindent}{0pt}
+\setsecheadstyle{\LARGE\bfseries\scshape}
+\setsubsecheadstyle{\Large\bfseries}
+\setsubsubsecheadstyle{\bfseries}
