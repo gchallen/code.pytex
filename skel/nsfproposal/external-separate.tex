@@ -1,0 +1,35 @@
+\input{./include/start.tex}
+\begin{document}
+
+% 16 Nov 2010 : GWA : Summary is one page, no page number.
+
+\chapterstyle{summary}
+\pagenumbering{gobble}
+\input{summary.tex}
+\clearpage
+
+% 16 Nov 2010 : GWA : Description is (usually) 15 pages, paginated.
+
+\chapterstyle{proposal}
+\pagenumbering{gobble}
+\pagenumbering{arabic}
+
+% 07 Oct 2011 : GWA : Modded for CRI.
+
+\input{introduction.tex}
+\input{enablingresearch.tex}
+\input{enablingeducation.tex}
+\input{service.tex}
+\input{broader.tex}
+\input{design.tex}
+\input{management.tex}
+\clearpage
+
+% 16 Nov 2010 : GWA : References have no page limit, separate pagination.
+
+\pagenumbering{gobble}
+\pagenumbering{arabic}
+\input{./include/bibliography.tex}
+\clearpage
+
+\end{document}

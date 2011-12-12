@@ -1,0 +1,23 @@
+Two options here. (1) is preferred, as this will both lead to consistent
+formatting and allow your contribution to be built as part of the full
+proposal.
+
+1) Use my template:
+  1) $ cp template.tex <firstname><lastname>.tex
+     $ cp template-separate.tex <firtsname><lastname>-separate.tex
+  2) Edit template-separate.tex, replacing template.tex with
+  <firstname><lastname>.tex.
+  3) Edit template.tex as appropriate. Using \nocite{} instead of \cite{}
+  will ensure that your publications are not numbered but included in the
+  list of references.
+  4) Edit Makefile. Add <firstname><lastname>-separate.tex to the build
+  targets. A build in this directory should succeed.
+  5) Edit biosketches.tex, adding <firstname><lastname>.tex where
+  appropriate. A build in the parent directory should succeed and include
+  your biosketch.
+  6) Add <firstname><lastname>.tex and <firstname><lastname>-separate.tex to
+  the repository; commit your other changes.
+ 
+2) Include your own 2-page CV as a PDF file. Please name it
+<firstname><lastname>.pdf (geoffreychallen.pdf) and add it to the git
+repository in this directory.

@@ -1,0 +1,65 @@
+\input{./include/start.tex}
+\begin{document}
+
+% 16 Nov 2010 : GWA : Summary is one page, no page number.
+
+\chapterstyle{summary}
+\pagenumbering{gobble}
+\input{summary.tex}
+\clearpage
+
+% 16 Nov 2010 : GWA : Description is (usually) 15 pages, paginated.
+
+\chapterstyle{proposal}
+\pagenumbering{gobble}
+\pagenumbering{arabic}
+
+% 07 Oct 2011 : GWA : Insert sections here.
+
+\input{description.tex}
+\clearpage
+
+% 06 Dec 2010 : GWA : Budget justification. Separate pagination.
+
+\pagenumbering{gobble}
+\pagenumbering{arabic}
+\input{justification.tex}
+\clearpage
+
+% 06 Dec 2010 : GWA : Facilities and equipment statement, separate
+%               pagination.
+
+\pagenumbering{gobble}
+\pagenumbering{arabic}
+\chapter{Facilities, Equipment, and Other Resources}
+\input{facilities.tex}
+\clearpage
+
+% 16 Nov 2010 : GWA : References have no page limit, separate pagination.
+
+\pagenumbering{gobble}
+\pagenumbering{arabic}
+\input{./include/bibliography.tex}
+\clearpage
+
+% 16 Nov 2010 : GWA : Bio-sketches are limited to two pages each. Here they
+%               are built together. Building under ./biosketches/ will build
+%               them separately. Pagination is reset in biosketches.tex.
+
+\input{./biosketches/biosketches.tex}
+
+% 16 Dec 2010 : GWA : Project personnel statement.
+
+\pagenumbering{gobble}
+\pagenumbering{arabic}
+\clearpage
+\input{personnel.tex}
+
+% 24 Oct 2011 : GWA : Data management.
+
+\pagenumbering{gobble}
+\pagenumbering{arabic}
+\clearpage
+\input{data.tex}
+
+\end{document}
