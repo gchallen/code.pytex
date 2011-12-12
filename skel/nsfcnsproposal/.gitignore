@@ -1,5 +1,5 @@
 proposal.pdf
-references.pdf
+*-separate.pdf
 .xxxnote
 *.swp
 *.aux
@@ -8,3 +8,4 @@ references.pdf
 *.bbl
 *.blg
 .deps
+.DS_Store
