@@ -8,7 +8,7 @@
 \RequirePackage{calc}
 \RequirePackage{mathpazo}
 \RequirePackage{ulem}
-\ProvidesClass{nsfcriproposal}[2010/10/22 GWA NSF CRI Proposal Class]
+\ProvidesClass{nsfproposal}[2010/10/22 GWA NSF Proposal Class]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions
 \LoadClass[onecolumn,oneside,final]{memoir}
