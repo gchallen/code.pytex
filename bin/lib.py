@@ -4,7 +4,7 @@ def clean(inlines):
   inlines = removecomments.sub("", inlines)
   fixpercents = re.compile(r"\\%", re.M)
   inlines = fixpercents.sub("%", inlines)
-  removetex = re.compile(r"~?\\(section|cite)\*+\{([^\}]+)\}", re.M)
+  removetex = re.compile(r"~?\\(section|cite|chapter|thispagestyle)\*+\{([^\}]+)\}", re.M)
   inlines = removetex.sub("", inlines)
   removetex2 = re.compile(r"\\(clearpage)", re.M)
   inlines = removetex2.sub("", inlines)
@@ -37,5 +37,13 @@ def clean(inlines):
   removeflushenumbf = re.compile(r"\\begin\{flushenumbf\}\s+(.*?)\s+\\end\{flushenumbf\}", re.S | re.M)
   inlines = removeflushenumbf.sub(r"\1", inlines)
 
-  output = '\n\n'.join([re.sub(r'\n', ' ', l) for l in re.split(r'\s{2,}', inlines)][0:])
+  newinlines = []
+  lines = re.split(r'\s{2,}', inlines)
+
+  while re.match(lines[0], r"^\s*$"):
+    lines = lines[1:]
+  while re.match(lines[-1], r"^\s*$"):
+    lines = lines[:-1]
+
+  output = '\n\n'.join([re.sub(r'\n', ' ', line) for line in lines])
   return output
