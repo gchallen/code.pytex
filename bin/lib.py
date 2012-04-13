@@ -4,7 +4,7 @@ def clean(inlines):
   inlines = removecomments.sub("", inlines)
   fixpercents = re.compile(r"\\%", re.M)
   inlines = fixpercents.sub("%", inlines)
-  removetex = re.compile(r"~?\\(section|cite)\{([^\}]+)\}", re.M)
+  removetex = re.compile(r"~?\\(section|cite)\*+\{([^\}]+)\}", re.M)
   inlines = removetex.sub("", inlines)
   removetex2 = re.compile(r"\\(clearpage)", re.M)
   inlines = removetex2.sub("", inlines)
