@@ -11,7 +11,7 @@
 \ProvidesClass{googleproposal}[2010/10/22 GWA Google Proposal Class]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions
-\LoadClass[onecolumn,oneside,final]{memoir}
+\LoadClass[onecolumn,oneside,final,article]{memoir}
 \RequirePackage{colortbl}
 \RequirePackage{threeparttable}
 
