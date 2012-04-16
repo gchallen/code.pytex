@@ -303,3 +303,9 @@
 
 \makeevenfoot{empty}{}{}{}
 \makeoddfoot{empty}{}{}{}
+
+\copypagestyle{numberonly}{headings}
+\makeoddhead{numberonly}{}{}{}
+\makeevenhead{numberonly}{}{}{}
+\makeoddfoot{numberonly}{}{\thepage}{}
+\makeevenfoot{numberonly}{}{\thepage}{}
