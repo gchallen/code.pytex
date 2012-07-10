@@ -37,7 +37,7 @@
 % \setlength{\oddsidemargin}{1in}
 % \setlength{\evensidemargin}{1in}
 
-\setlrmarginsandblock{1in}{1in}{*}
+\setlrmarginsandblock{2in}{1in}{*}
 
 % 22 Oct 2010 : GWA : Used to be:
 % \setlength{\topmargin}{1in}

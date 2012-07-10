@@ -67,7 +67,11 @@ for f in files:
         if withpdf.match(m.group(2)):
           graphic_files.append(m.group(2))
         else:
-          graphic_files.append(m.group(2) + ".pdf")
+          path, ext = os.splitext(m.group(2))
+          if ext == '':
+            graphic_files.append(path + ".pdf")
+          else:
+            graphic_files.append(m.group(2))
     except:
       True
     input_files.append(toprocess.pop(0))

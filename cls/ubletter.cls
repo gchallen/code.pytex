@@ -119,8 +119,8 @@
 \copypagestyle{letter}{headings}
 \makeoddhead{letter}{{\scshape \small \shorttitle}}{}{{\scshape \small \shortauthors}}
 \makeevenhead{letter}{{\scshape \small \shorttitle}}{}{{\scshape \small \shortauthors}}
-\makeoddfoot{letter}{}{\thepage}{}
-\makeevenfoot{letter}{}{\thepage}{}
+\makeoddfoot{letter}{}{}{\thepage}
+\makeevenfoot{letter}{}{}{\thepage}
 
 \copypagestyle{emptyletter}{letter}
 \makeoddhead{emptyletter}{}{}{}
