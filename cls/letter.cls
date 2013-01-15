@@ -16,6 +16,10 @@
 \RequirePackage{datetime}
 \RequirePackage{threeparttable}
 
+\nonzeroparskip
+\setlength{\parindent}{0pt}
+\renewcommand{\thetable}{\arabic{table}}
+
 \usdate
 
 % 22 Oct 2010 : GWA : Set up simple chapter headings.
