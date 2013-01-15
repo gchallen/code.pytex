@@ -1,0 +1,9 @@
+letter.pdf
+.xxxnote
+*.swp
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+.deps
