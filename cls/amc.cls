@@ -9,11 +9,14 @@
 \ProcessOptions
 \LoadClass[onecolumn,oneside,final]{memoir}
 \let\footruleskip\undefined
-\RequirePackage[box,completemulti,separateanswersheet,digits,outsidebox]{automultiplechoice}
+\RequirePackage[box,completemulti]{automultiplechoice}
 \RequirePackage{datetime}
 \RequirePackage{colortbl}
 \RequirePackage{threeparttable}
 \RequirePackage{fancyvrb}
+\RequirePackage{amsmath}
+\RequirePackage{MnSymbol}
+\RequirePackage{wasysym}
 
 \nonzeroparskip
 \setlength{\parindent}{0pt}
@@ -54,7 +57,7 @@
 % \setlength{\footskip}{36pt}
 % \setlength{\headheight}{0pt}
 
-\setheadfoot{36pt}{36pt}
+\setheadfoot{48pt}{36pt}
 
 % 22 Oct 2010 : GWA : Used to be:
 % \setlength{\marginparsep}{0.5cm}
@@ -68,3 +71,16 @@
 
 \tightlists
 \firmlists
+
+\makechapterstyle{amc}{%
+  \renewcommand{\chapterheadstart}{} 
+  \renewcommand{\printchaptername}{} 
+  \renewcommand{\chapternamenum}{} 
+  \renewcommand{\printchapternum}{} 
+  \renewcommand{\afterchapternum}{} 
+  \renewcommand{\printchaptertitle}[1]{%
+    \Large\scshape\MakeUppercase{##1}
+  } 
+  \renewcommand{\afterchaptertitle}{}
+} 
+\chapterstyle{amc}
