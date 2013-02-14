@@ -86,7 +86,7 @@
 % 26 Oct 2010 : GWA : Section styles.
 \setsecnumformat{}
 \setbeforesecskip{-2.0ex plus -0.5ex minus -0.2ex}
-\setaftersecskip{0.1ex plus 0.1ex minus 0.1ex}
+\setaftersecskip{0.3ex plus -0.2ex minus -0.2ex}
 
 % 26 Oct 2010 : GWA : Subsection styles.
 \setcounter{secnumdepth}{2}

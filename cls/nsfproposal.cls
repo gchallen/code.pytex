@@ -120,6 +120,17 @@
   \renewcommand{\printchaptertitle}[1]{}
   \renewcommand{\afterchaptertitle}{}
 } 
+\makechapterstyle{biosketch}{%
+  \renewcommand{\chapterheadstart}{} 
+  \renewcommand{\printchaptername}{} 
+  \renewcommand{\chapternamenum}{} 
+  \renewcommand{\printchapternum}{} 
+  \renewcommand{\afterchapternum}{} 
+  \renewcommand{\printchaptertitle}[1]{%
+    \Large\scshape\MakeUppercase{##1}
+  } 
+  \renewcommand{\afterchaptertitle}{\vspace{0.5\onelineskip} \hrule \vspace{0.5\onelineskip}}
+} 
 \definecolor{shadecolor}{gray}{0.9}
 \newcommand{\proposalsec}[1]{%
   \large\bfseries\raggedright #1
