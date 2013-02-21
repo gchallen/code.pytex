@@ -1,6 +1,6 @@
 START = xxxnote
 END = missing
-CLASS = $(PYTEX)/cls/usenix.sty
+CLASS = $(PYTEX)/cls/sosp.sty
 
 all: paper
 
