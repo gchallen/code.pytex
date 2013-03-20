@@ -6379,7 +6379,12 @@
 }
 \def\unframedsolutions{\@framedsolutionsfalse\@shadedsolutionsfalse}
 
+\newenvironment{rubric}{%
+\MakeFramed{\advance\hsize-\width}\textbf{Rubric:}}%
+{\endMakeFramed}
+
 \endinput
+
 %---------------------------------------------------------------------
 %---------------------------------------------------------------------
 %---------------------------------------------------------------------
