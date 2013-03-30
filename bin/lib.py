@@ -14,6 +14,10 @@ def clean(inlines):
   inlines = keeptex2.sub(r"\1", inlines)
   quotes = re.compile(r"(``|'')", re.M)
   inlines = quotes.sub(r'"', inlines)
+  en_dashes = re.compile(r"[^-]--[^-]", re.M)
+  inlines = en_dashes.sub(u"\u2013", inlines)
+  em_dashes = re.compile(r"([^-])---([^-])", re.M)
+  inlines = em_dashes.sub(u"\\1\u2014\\2", inlines)
   enumerate = re.compile(r"\\begin\{enumerate\}(.*?)\\end\{enumerate\}", re.S | re.M)
 
   class Counter:

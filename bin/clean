@@ -26,4 +26,4 @@ else:
   except:
     sys.exit(1)
 
-print >>outfile, lib.clean(inlines)
+outfile.write(lib.clean(inlines).encode('utf8'))
