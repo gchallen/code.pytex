@@ -8,7 +8,7 @@
 \RequirePackage{calc}
 \RequirePackage{mathpazo}
 \RequirePackage{ulem}
-\ProvidesClass{nsfcnsproposal}[2010/10/22 GWA NSF CNS Proposal Class]
+\ProvidesClass{nsf-biosketch}[2010/10/22 GWA NSF CNS Proposal Class]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions
 \LoadClass[onecolumn,oneside,final]{memoir}
