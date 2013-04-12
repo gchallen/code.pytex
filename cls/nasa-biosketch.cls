@@ -122,7 +122,7 @@
 } 
 \definecolor{shadecolor}{gray}{0.9}
 \newcommand{\proposalsec}[1]{%
-  \large\bfseries\raggedright #1
+  \bfseries\raggedright #1
 }
 \setsecheadstyle{\proposalsec}
 \renewcommand{\thesection}{\arabic{section}}
@@ -130,14 +130,14 @@
 
 % 26 Oct 2010 : GWA : Section styles.
 \setsecnumformat{\csname the#1\endcsname\space---\space}
-\setbeforesecskip{-2.0ex plus -0.5ex minus -0.2ex}
-\setaftersecskip{1.0ex plus 0.2ex minus 0.1ex}
+\setbeforesecskip{-1.0ex plus -0.3ex minus -0.1ex}
+\setaftersecskip{0.8ex plus 0.1ex minus 0.1ex}
 
 % 26 Oct 2010 : GWA : Subsection styles.
 \setcounter{secnumdepth}{2}
 \setsubsecheadstyle{\bfseries\raggedright}
-\setbeforesubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
-\setaftersubsecskip{0.3ex plus -0.2ex minus -0.2ex}
+\setbeforesubsecskip{-0.3ex plus -0.1ex minus -0.1ex}
+\setaftersubsecskip{0.2ex plus -0.1ex minus -0.1ex}
 
 \newcounter{flushenumbfenum}
 \newenvironment{flushenumbf}{
