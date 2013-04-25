@@ -4,7 +4,7 @@ def clean(inlines):
   inlines = removecomments.sub("", inlines)
   fixpercents = re.compile(r"\\%", re.M)
   inlines = fixpercents.sub("%", inlines)
-  removetex = re.compile(r"~?\\(section|cite|chapter|thispagestyle)\*+\{([^\}]+)\}", re.M)
+  removetex = re.compile(r"~?\\(((sub)*)section(\*?)|cite|chapter|thispagestyle)\*+\{([^\}]+)\}", re.M)
   inlines = removetex.sub("", inlines)
   removetex2 = re.compile(r"\\(clearpage)", re.M)
   inlines = removetex2.sub("", inlines)
@@ -18,6 +18,10 @@ def clean(inlines):
   inlines = phonelab_macro.sub("PhoneLab", inlines)
   keep_together = re.compile(r"~", re.M)
   inlines = keep_together.sub(" ", inlines)
+  en_dashes = re.compile(r"[^-]--[^-]", re.M)
+  inlines = en_dashes.sub(u"\u2013", inlines)
+  em_dashes = re.compile(r"([^-])---([^-])", re.M)
+  inlines = em_dashes.sub(u"\\1\u2014\\2", inlines)
   enumerate = re.compile(r"\\begin\{enumerate\}(.*?)\\end\{enumerate\}", re.S | re.M)
 
   class Counter:

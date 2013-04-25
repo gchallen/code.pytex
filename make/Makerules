@@ -1,4 +1,5 @@
 SHELL := /bin/bash
+export TEXINPUTS :=.:$(PYTEX)/cls:
 
 # 16 Nov 2010 : GWA : Watch all .tex files below this directory to determine
 #               when to rebuild the dependencies.

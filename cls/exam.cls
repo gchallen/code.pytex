@@ -6379,7 +6379,34 @@
 }
 \def\unframedsolutions{\@framedsolutionsfalse\@shadedsolutionsfalse}
 
+\newenvironment{rubric}{%
+  \ifprintanswers
+  \MakeFramed{\advance\hsize-\width}\textbf{Rubric:}
+  \else
+  \setbox\z@\vbox\bgroup
+  \fi
+}%
+{\ifprintanswers
+  \endMakeFramed
+  \else
+  \egroup
+  \fi}
+
+\newenvironment{wideframed}{%
+  \ifprintanswers
+  \MakeFramed{\advance\hsize-\width}
+  \else
+  \setbox\z@\vbox\bgroup
+  \fi}%
+{\ifprintanswers
+  \endMakeFramed
+  \else
+  \egroup
+  \fi}
+
+
 \endinput
+
 %---------------------------------------------------------------------
 %---------------------------------------------------------------------
 %---------------------------------------------------------------------
