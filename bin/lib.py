@@ -14,6 +14,10 @@ def clean(inlines):
   inlines = keeptex2.sub(r"\1", inlines)
   quotes = re.compile(r"(``|'')", re.M)
   inlines = quotes.sub(r'"', inlines)
+  phonelab_macro = re.compile(r"\\PhoneLab{}", re.M)
+  inlines = phonelab_macro.sub("PhoneLab", inlines)
+  keep_together = re.compile(r"~", re.M)
+  inlines = keep_together.sub(" ", inlines)
   enumerate = re.compile(r"\\begin\{enumerate\}(.*?)\\end\{enumerate\}", re.S | re.M)
 
   class Counter:
