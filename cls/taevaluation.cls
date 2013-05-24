@@ -84,9 +84,9 @@
 \chapterstyle{proposal}
 
 % 26 Oct 2010 : GWA : Section styles.
-\setsecnumformat{}
+\setsecnumformat{\csname the#1\endcsname\space)\space}
 \setbeforesecskip{-2.0ex plus -0.5ex minus -0.2ex}
-\setaftersecskip{0.3ex plus -0.2ex minus -0.2ex}
+\setaftersecskip{0.01ex}
 
 % 26 Oct 2010 : GWA : Subsection styles.
 \setcounter{secnumdepth}{2}
@@ -117,10 +117,14 @@
   {\end{list}}
 
 \copypagestyle{taevaluation}{headings}
-\makeoddhead{taevaluation}{Teaching Quality Committee}{page \thepage of \pageref{LastPage}}{\today}
-\makeoddhead{taevaluation}{Teaching Quality Committee}{page \thepage of \pageref{LastPage}}{\today}
-\makeoddfoot{taevaluation}{}{Room 338 Davis Hall}{}
-\makeoddfoot{taevaluation}{}{Room 338 Davis Hall}{}
+\makeoddhead{taevaluation}{{\small Teaching Quality Committee}}{{\small page \thepage\space of \pageref{LastPage}}}{{\small \today}}
+\makeevenhead{taevaluation}{{\small Teaching Quality Committee}}{{\small page \thepage\space of \pageref{LastPage}}}{{\small \today}}
+\makeoddfoot{taevaluation}{}{{\small Room 338 Davis Hall\\Buffalo, NY 14260--2500}}{}
+\makeevenfoot{taevaluation}{}{{\small Room 338 Davis Hall\\Buffalo, NY 14260--2500}}{}
+
+\copypagestyle{taevaluationfirst}{taevaluation}
+\makeoddhead{taevaluationfirst}{}{}{}
+\makeevenhead{taevaluationfirst}{}{}{}
 
 \makeatletter
 \newcommand\BackgroundPicture[1]{%
