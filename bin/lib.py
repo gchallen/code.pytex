@@ -50,8 +50,12 @@ def clean(inlines):
 
   while re.match(lines[0], r"^\s*$"):
     lines = lines[1:]
+    if len(lines) == 0:
+      return ""
   while re.match(lines[-1], r"^\s*$"):
     lines = lines[:-1]
+    if len(lines) == 0:
+      return ""
 
   output = '\n\n'.join([re.sub(r'\n', ' ', line) for line in lines])
   return output
