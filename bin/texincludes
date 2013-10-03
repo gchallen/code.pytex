@@ -19,13 +19,13 @@ try:
 except:
   sys.exit(1)
 
-docfile = re.compile(r"^[^%]*?\\begin\{document\}", re.M)
-inputs = re.compile(r"^[^%]*?\\input{(.*)}", re.M)
-bibs = re.compile(r"^[^%]*?\\bibliography\{(.*)\}", re.M)
-citations = re.compile(r"^[^%]*?\\(no)?cite", re.M)
-graphics = re.compile(r"^[^%]*?\\includegraphics(\[.*?\])?\{(.*?)\}", re.M)
+docfile = re.compile(r"""(?m)^(?!\s+%).*\\begin\{document\}""")
+inputs = re.compile(r"""(?m)^(?!\s+%).*\\input{(.*)}""")
+bibs = re.compile(r"""(?m)^(?!\s+%).*\\bibliography\{(.*)\}""")
+citations = re.compile(r"""(?m)^(?!\s+%).*\\(no)?cite""")
+graphics = re.compile(r"""(?m)^(?!\s+%).*\\includegraphics(\[.*?\])?\{(.*?)\}""")
 withpdf = re.compile(r"^.*\.pdf$")
-nobibtex = re.compile(r"^% !NOBIBTEX!", re.M)
+nobibtex = re.compile(r"""(?m)^% !NOBIBTEX!""")
 
 nobibtexs = {}
 
