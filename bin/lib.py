@@ -1,5 +1,7 @@
+import re
+
 def clean(inlines):
-  import sys, re, os, textwrap
+  
   removecomments = re.compile(r"^(%.*)$", re.M)
   inlines = removecomments.sub("", inlines)
   fixpercents = re.compile(r"\\%", re.M)
@@ -22,7 +24,7 @@ def clean(inlines):
   inlines = en_dashes.sub(u"\\1\u2013\\2", inlines)
   em_dashes = re.compile(r"([^-])---([^-])", re.M)
   inlines = em_dashes.sub(u"\\1\u2014\\2", inlines)
-  enumerate = re.compile(r"\\begin\{enumerate\}(.*?)\\end\{enumerate\}", re.S | re.M)
+  enum = re.compile(r"\\begin\{enumerate\}(.*?)\\end\{enumerate\}", re.S | re.M)
 
   class Counter:
     def __init__(self):
@@ -32,20 +34,20 @@ def clean(inlines):
     def increment(self, matchObject):
       self.count += 1
       return str(self.count) + "."
+  
   def match(m):
     c = Counter()
     item = re.compile(r"\\item")
     text = item.sub(c.increment, m.group(1))
     c.reset()
     return text
-  inlines = enumerate.sub(match, inlines)
+  inlines = enum.sub(match, inlines)
 
   removeitem = re.compile(r"~?\\item", re.M)
   inlines = removeitem.sub("", inlines)
   removeflushenumbf = re.compile(r"\\begin\{flushenumbf\}\s+(.*?)\s+\\end\{flushenumbf\}", re.S | re.M)
   inlines = removeflushenumbf.sub(r"\1", inlines)
 
-  newinlines = []
   lines = re.split(r'\s{2,}', inlines)
 
   while re.match(lines[0], r"^\s*$"):
