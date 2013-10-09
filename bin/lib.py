@@ -11,7 +11,11 @@ def clean(inlines):
   removetex2 = re.compile(r"\\(clearpage)", re.M)
   inlines = removetex2.sub("", inlines)
   keeptex = re.compile(r"\\(textit|textbf|texttt|textsc)\{([^\}]+)\}", re.M)
-  inlines = keeptex.sub(r"\2", inlines)
+  while True:
+    beforelines = inlines
+    inlines = keeptex.sub(r"\2", inlines)
+    if inlines == beforelines:
+      break
   keeptex2 = re.compile(r"\{\\scshape\s+([^\}]+)\}", re.S | re.M)
   inlines = keeptex2.sub(r"\1", inlines)
   quotes = re.compile(r"(``|'')", re.M)
