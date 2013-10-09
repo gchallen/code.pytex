@@ -10,7 +10,7 @@ def clean(inlines):
   inlines = removetex.sub("", inlines)
   removetex2 = re.compile(r"\\(clearpage)", re.M)
   inlines = removetex2.sub("", inlines)
-  keeptex = re.compile(r"\\(textit|textbf|texttt)\{([^\}]+)\}", re.M)
+  keeptex = re.compile(r"\\(textit|textbf|texttt|textsc)\{([^\}]+)\}", re.M)
   inlines = keeptex.sub(r"\2", inlines)
   keeptex2 = re.compile(r"\{\\scshape\s+([^\}]+)\}", re.S | re.M)
   inlines = keeptex2.sub(r"\1", inlines)
