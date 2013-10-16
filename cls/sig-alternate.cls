@@ -1305,7 +1305,7 @@
 \ifnum\addauflag=0\addauthorsection\global\addauflag=1\fi
      \section[References]{%    <=== OPTIONAL ARGUMENT ADDED HERE
         {References} % was uppercased but this affects pdf bookmarks (SP/GM October 2004)
-          {\vskip -9pt plus 1pt} % GM Nov. 2006 / GM July 2000 (for somewhat tighter spacing) 
+          {\vskip -2pt plus 1pt} % GM Nov. 2006 / GM July 2000 (for somewhat tighter spacing) 
          \@mkboth{{\refname}}{{\refname}}%
      }%
      \list{[\arabic{enumi}]}{%
