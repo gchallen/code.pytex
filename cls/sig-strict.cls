@@ -1445,16 +1445,19 @@
 % Gerry Nov. 30th. 1999
 \newtoks\copyrtyr
 \newtoks\acmcopyr
+\newtoks\acmcrurl
 \newtoks\boilerplate
 \def\CopyrightYear#1{\global\copyrtyr{#1}}
 \def\crdata#1{\global\acmcopyr{#1}}
+\def\crurl#1{\global\acmcrurl{\href{#1}{#1}}}
 \def\permission#1{\global\boilerplate{#1}}
 %
 \newtoks\copyrightetc
+\def\cretc#1{\global\copyrightetc{#1}}
 \global\copyrightetc{\ } %  Need to have 'something' so that adequate space is left for pasting in a line if "confinfo" is supplied.
 
 \toappear{\the\boilerplate\par
-{\confname{\the\conf}} \the\confinfo\par \the\copyrightetc}
+{\confname{\the\conf}} \the\confinfo\par \the\copyrightetc\par \the\acmcrurl}
 % End of ACM_PROC_ARTICLE-SP.CLS -- V3.2SP - 04/22/2009 --
 % Gerry Murray -- Wednesday April 22nd. 2009
 %
