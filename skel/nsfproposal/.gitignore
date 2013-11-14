@@ -1,5 +1,7 @@
+/SUMMARY
 proposal.pdf
 *-separate.pdf
+/description-split.pdf
 .xxxnote
 *.swp
 *.aux
@@ -7,5 +9,7 @@ proposal.pdf
 *.out
 *.bbl
 *.blg
+*.~lock*
+*.bak
 .deps
 .DS_Store
