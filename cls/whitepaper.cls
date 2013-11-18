@@ -73,8 +73,8 @@
 
 \newlength{\lefttitle}
 \newlength{\righttitle}
-\setlength{\lefttitle}{0.75\textwidth}
-\setlength{\righttitle}{0.2\textwidth}
+\setlength{\lefttitle}{0.7\textwidth}
+\setlength{\righttitle}{0.3\textwidth}
 
 \mmddyyyydate
 \makechapterstyle{proposal}{%
@@ -89,8 +89,7 @@
 \raggedright
 \Large\scshape\MakeUppercase{##1}
 \vspace*{0.10in}
-\end{minipage}
-\hfill
+\end{minipage}%
 \begin{minipage}[t]{\righttitle}
 \vspace{0pt}
 \raggedleft

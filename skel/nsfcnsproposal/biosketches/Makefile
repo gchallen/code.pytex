@@ -1,6 +1,6 @@
 START = noxxxnote
 END = missing
-CLASS = $(PYTEX)/cls/nsfcnsproposal.cls
+CLASS = $(PYTEX)/cls/nsfproposal.cls
 
 all: geoffreychallen-separate template-separate
 

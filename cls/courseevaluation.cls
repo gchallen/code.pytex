@@ -157,8 +157,8 @@
 %\addtopsmarks{whitepaper}{}{%
 %\nouppercaseheads
 %\createmark{chapter}{left}{nonumber}{}{}}
-\makeoddhead{whitepaper}{{\scshape \small \shortcourse}}{}{{\scshape \small \shortsemester}}
-\makeevenhead{whitepaper}{{\scshape \small \shortcourse}}{}{{\scshape \small \shortsemester}}
+\makeoddhead{whitepaper}{{\scshape \small \shortcourse}}{}{}
+\makeevenhead{whitepaper}{{\scshape \small \shortcourse}}{}{}
 \makeoddfoot{whitepaper}{}{\thepage}{}
 \makeevenfoot{whitepaper}{}{\thepage}{}
 
