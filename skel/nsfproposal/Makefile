@@ -7,7 +7,8 @@ DESCRIPTION_END = 15
 REFERENCES_START = $(shell echo $(DESCRIPTION_END) + 1 | bc)
 SPLIT_DESCRIPTION = False
 
-all: proposal $(SPLIT_TARGETS) wc SUMMARY
+#all: proposal $(SPLIT_TARGETS) wc SUMMARY
+all: proposal
 	@$(MAKE) -C biosketches
 	@$(MAKE) -C currentandpending
 
