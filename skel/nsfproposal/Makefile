@@ -8,9 +8,9 @@ REFERENCES_START = $(shell echo $(DESCRIPTION_END) + 1 | bc)
 SPLIT_DESCRIPTION = False
 
 #all: proposal $(SPLIT_TARGETS) wc SUMMARY
+#	@$(MAKE) -C biosketches
+#	@$(MAKE) -C currentandpending
 all: proposal
-	@$(MAKE) -C biosketches
-	@$(MAKE) -C currentandpending
 
 description-separate.pdf: description-split.pdf
 ifeq ($(SPLIT_DESCRIPTION),True)
