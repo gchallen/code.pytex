@@ -138,6 +138,8 @@
 \setsubsecheadstyle{\bfseries\raggedright}
 \setbeforesubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
 \setaftersubsecskip{0.3ex plus -0.2ex minus -0.2ex}
+\setbeforesubsubsecskip{-1.0ex plus -0.2ex minus -0.2ex}
+\setaftersubsubsecskip{-0.3ex plus -0.2ex minus -0.2ex}
 
 \newcounter{flushenumbfenum}
 \newenvironment{flushenumbf}{

@@ -5,16 +5,23 @@ SPLIT_TARGETS = summary-separate justification-separate facilities-separate data
 
 DESCRIPTION_END = 15
 REFERENCES_START = $(shell echo $(DESCRIPTION_END) + 1 | bc)
+SPLIT_DESCRIPTION = False
 
 all: proposal $(SPLIT_TARGETS) wc SUMMARY
 	@$(MAKE) -C biosketches
 	@$(MAKE) -C currentandpending
 
 description-separate.pdf: description-split.pdf
+ifeq ($(SPLIT_DESCRIPTION),True)
 	pdfjam description-split.pdf '1-$(DESCRIPTION_END)' --outfile description-separate.pdf
+else
+endif
 
 references-separate.pdf: description-split.pdf
+ifeq ($(SPLIT_DESCRIPTION),True)
 	pdfjam description-split.pdf '$(REFERENCES_START)-' --outfile references-separate.pdf
+else
+endif
 
 figures:
 	@cd figures ; make
