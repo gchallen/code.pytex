@@ -10,7 +10,7 @@ def clean(inlines):
   inlines = removetex.sub("", inlines)
   removetex2 = re.compile(r"\\(clearpage)", re.M)
   inlines = removetex2.sub("", inlines)
-  keeptex = re.compile(r"\\(textit|textbf|texttt|textsc)\{([^\}]+)\}", re.M)
+  keeptex = re.compile(r"\\(textit|textbf|texttt|textsc|sloppypar)\{([^\}]+)\}", re.M)
   while True:
     beforelines = inlines
     inlines = keeptex.sub(r"\2", inlines)
