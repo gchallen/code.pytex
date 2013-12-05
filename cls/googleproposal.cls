@@ -83,9 +83,9 @@
   \renewcommand{\printchapternum}{} 
   \renewcommand{\afterchapternum}{} 
   \renewcommand{\printchaptertitle}[1]{%
-    \Large\scshape\MakeUppercase{##1}
+    \large\scshape\MakeUppercase{##1}
   } 
-  \renewcommand{\afterchaptertitle}{\vspace{0.5\onelineskip} \hrule \vspace{0.5\onelineskip}}
+  \renewcommand{\afterchaptertitle}{\vspace{0.1\onelineskip} \hrule} 
 } 
 \makechapterstyle{summary}{%
   \renewcommand{\chapterheadstart}{}
