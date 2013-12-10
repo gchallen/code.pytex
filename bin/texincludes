@@ -90,19 +90,19 @@ for f in files:
   print >>output, "%s.ps : %s.pdf"
   print >>output, "%s.pdf : %s" % (fbasename, " ".join(all_files))
   if docitations and not nobibtexs[f]:
-    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tpdflatex -shell-escape %s" % (f)
     print >>output, "\tbibtex %s"  % (fbasename)
-    print >>output, "\tpdflatex %s" % (f)
-    print >>output, "\tpdflatex %s" % (f)
-    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tpdflatex -shell-escape %s" % (f)
+    print >>output, "\tpdflatex -shell-escape %s" % (f)
+    print >>output, "\tpdflatex -shell-escape %s" % (f)
     print >>output, "%s.bbl %s.blg : %s" % (fbasename, fbasename, " ".join(bib_files))
-    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tpdflatex -shell-escape %s" % (f)
     print >>output, "\tbibtex %s"  % (fbasename)
-    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tpdflatex -shell-escape %s" % (f)
   else:
-    print >>output, "\tpdflatex %s" % (f)
-    print >>output, "\tpdflatex %s" % (f)
-    print >>output, "\tpdflatex %s" % (f)
+    print >>output, "\tpdflatex -shell-escape %s" % (f)
+    print >>output, "\tpdflatex -shell-escape %s" % (f)
+    print >>output, "\tpdflatex -shell-escape %s" % (f)
   tex_files = [all_file for all_file in all_files if all_file.endswith(".tex")]
   print >>output, "spell-%s : %s" % (fbasename, " ".join(tex_files),)
   for tex_file in tex_files:
