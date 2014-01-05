@@ -19,11 +19,11 @@ try:
 except:
   sys.exit(1)
 
-docfile = re.compile(r"""(?m)^(?!\s+%).*\\begin\{document\}""")
-inputs = re.compile(r"""(?m)^(?!\s+%).*\\input{(.*)}""")
-bibs = re.compile(r"""(?m)^(?!\s+%).*\\bibliography\{(.*)\}""")
-citations = re.compile(r"""(?m)^(?!\s+%).*\\(no)?cite""")
-graphics = re.compile(r"""(?m)^(?!\s+%).*\\includegraphics(\[.*?\])?\{(.*?)\}""")
+docfile = re.compile(r"""(?m)^(?!\s*%).*\\begin\{document\}""")
+inputs = re.compile(r"""(?m)^(?!\s*%).*\\input{(.*)}""")
+bibs = re.compile(r"""(?m)^(?!\s*%).*\\bibliography\{(.*)\}""")
+citations = re.compile(r"""^(?m)^(?!\s*%).*\\(?:no)?cite""")
+graphics = re.compile(r"""(?m)^(?!\s*%).*\\includegraphics(\[.*?\])?\{(.*?)\}""")
 withpdf = re.compile(r"^.*\.pdf$")
 nobibtex = re.compile(r"""(?m)^% !NOBIBTEX!""")
 
@@ -52,11 +52,9 @@ for f in files:
         nobibtexs[toprocess[0]] = True
       else:
         nobibtexs[toprocess[0]] = False
-      if citations.search(lines):
+      if len(citations.findall(lines)) > 0:
         docitations = True
-      i = inputs.finditer(lines)
-      for m in i:
-        toprocess.append(m.group(1))
+      toprocess += inputs.findall(lines)
       b = bibs.finditer(lines)
       for m in b:
         allbibs = m.group(1).split(",")
