@@ -87,8 +87,8 @@
 \noindent\begin{minipage}[t]{\lefttitle}
 \vspace{0pt}
 \raggedright
-\Large\scshape\MakeUppercase{##1}
-\vspace*{0.10in}
+\Large\scshape\MakeUppercase{##1}\\
+{\large\theauthors}
 \end{minipage}%
 \begin{minipage}[t]{\righttitle}
 \vspace{0pt}
@@ -96,7 +96,6 @@
 \includegraphics[width=0.5in]{./figures/blue.jpg}\\
 {\small\submissiondate}
 \end{minipage}
-{\large\theauthors}
 }
   \renewcommand{\afterchaptertitle}{\vspace{0.5\onelineskip} \hrule \vspace{0.5\onelineskip}}
 } 
