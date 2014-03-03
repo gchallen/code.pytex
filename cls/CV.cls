@@ -42,7 +42,7 @@
 % \setlength{\oddsidemargin}{1in}
 % \setlength{\evensidemargin}{1in}
 
-\setlrmarginsandblock{1.5in}{1in}{*}
+\setlrmarginsandblock{1.35in}{1in}{*}
 
 % 22 Oct 2010 : GWA : Used to be:
 % \setlength{\topmargin}{1in}
@@ -82,3 +82,5 @@
 \setsubsecheadstyle{\Large\upshape}
 \renewcommand{\thesubsection}{\arabic{subsection}}
 \setsecnumformat{\csname the#1\endcsname.\space\space}
+
+\setaftersubsubsecskip{0.7ex plus -0.2ex minus -0.2ex}

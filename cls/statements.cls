@@ -87,13 +87,13 @@
 \noindent\begin{minipage}[t]{\lefttitle}
 \vspace{0pt}
 \raggedright
-\Large\scshape\MakeUppercase{##1}\\
-{\large\theauthors}
+\LARGE\scshape\MakeUppercase{##1}\\
+{\Large\theauthors}
 \end{minipage}%
 \begin{minipage}[t]{\righttitle}
 \vspace{0pt}
 \raggedleft
-\includegraphics[width=0.5in]{./figures/blue.jpg}\\
+\includegraphics[width=0.6in]{./figures/blue.jpg}\\
 {\small\submissiondate}
 \end{minipage}
 }
@@ -110,7 +110,7 @@
 } 
 \definecolor{shadecolor}{gray}{0.9}
 \newcommand{\proposalsec}[1]{%
-  \large\bfseries\scshape\raggedright #1
+  \Large\bfseries\scshape\raggedright #1
 }
 \setsecheadstyle{\proposalsec}
 \nonzeroparskip
@@ -119,15 +119,17 @@
 \chapterstyle{proposal}
 
 % 26 Oct 2010 : GWA : Section styles.
-\setsecnumformat{}
+\setsecnumformat{\csname the#1\endcsname\space---\space}
 \setbeforesecskip{-2.0ex plus -0.5ex minus -0.2ex}
-\setaftersecskip{0.1ex plus 0.1ex minus 0.1ex}
+\setaftersecskip{1.5ex plus 0.2ex minus 0.1ex}
 
 % 26 Oct 2010 : GWA : Subsection styles.
 \setcounter{secnumdepth}{2}
 \setsubsecheadstyle{\bfseries\raggedright}
-\setbeforesubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
-\setaftersubsecskip{-0.5ex plus -0.2ex minus -0.2ex}
+\setbeforesubsecskip{2.5ex plus 0.3ex minus 0.3ex}
+\setaftersubsecskip{1.5ex plus 0.3ex minus 0.3ex}
+\setbeforesubsubsecskip{-1.0ex plus -0.2ex minus -0.2ex}
+\setaftersubsubsecskip{-0.3ex plus -0.2ex minus -0.2ex}
 
 \newcounter{flushenumbfenum}
 \newenvironment{flushenumbf}{
