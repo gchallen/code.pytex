@@ -51,6 +51,8 @@ def clean(inlines):
   inlines = removeitem.sub("", inlines)
   removeflushenumbf = re.compile(r"\\begin\{flushenumbf\}\s+(.*?)\s+\\end\{flushenumbf\}", re.S | re.M)
   inlines = removeflushenumbf.sub(r"\1", inlines)
+  removebeginabstract = re.compile(r"\\begin\{abstract\}\s+(.*?)\s+\\end\{abstract\}", re.S | re.M)
+  inlines = removebeginabstract.sub(r"\1", inlines)
 
   lines = re.split(r'\s{2,}', inlines)
 
