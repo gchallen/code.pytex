@@ -43,6 +43,38 @@ noxxxnote:
 		rm -f .xxxnote-new; \
 		fi
 
+draft:
+	@echo "\\def\\isdraft{1}" > .draft-new
+	@if [ -n "`diff -N 2>/dev/null .draft .draft-new`" ]; then\
+		mv .draft-new .draft; \
+		else\
+		rm -f .draft-new; \
+		fi
+
+nodraft:
+	@echo "" > .draft-new
+	@if [ -n "`diff -N 2>/dev/null .draft .draft-new`" ]; then\
+		mv .draft-new .draft; \
+		else\
+		rm -f .draft-new; \
+		fi
+
+blue:
+	@echo "\\def\\isblue{1}" > .blue-new
+	@if [ -n "`diff -N 2>/dev/null .blue .blue-new`" ]; then\
+		mv .blue-new .blue; \
+		else\
+		rm -f .blue-new; \
+		fi
+
+noblue:
+	@echo "" > .blue-new
+	@if [ -n "`diff -N 2>/dev/null .blue .blue-new`" ]; then\
+		mv .blue-new .blue; \
+		else\
+		rm -f .blue-new; \
+		fi
+
 .embed.pdf: $(PDF)
 	gs -dSAFER -dNOPLATFONTS -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=letter -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.4 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=.embed.pdf -f $(PDF)
 	@cp .embed.pdf $(PDF)
@@ -74,4 +106,4 @@ pages: $(PDF)
 
 # 16 Nov 2010 : GWA : Phony targets.
 
-.PHONY : pages rulesclean missing-fail missing xxxnote noxxxnote clean allclean all figures wc
+.PHONY : pages rulesclean missing-fail missing xxxnote noxxxnote draft nodraft blue noblue clean allclean all figures wc
