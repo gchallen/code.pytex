@@ -22,6 +22,8 @@ def clean(inlines):
   inlines = quotes.sub(r'"', inlines)
   phonelab_macro = re.compile(r"\\PhoneLab{}", re.M)
   inlines = phonelab_macro.sub("PhoneLab", inlines)
+  wifi_macro = re.compile(r"\\wifi{}", re.M)
+  inlines = wifi_macro.sub("Wifi", inlines)
   keep_together = re.compile(r"~", re.M)
   inlines = keep_together.sub(" ", inlines)
   en_dashes = re.compile(r"([^-])--([^-])", re.M)

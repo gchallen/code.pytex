@@ -122,6 +122,12 @@
 \makeoddfoot{letter}{}{}{\thepage}
 \makeevenfoot{letter}{}{}{\thepage}
 
+\copypagestyle{headingsonly}{headings}
+\makeoddhead{headingsonly}{{\scshape \small \shorttitle}}{}{{\scshape \small \shortauthors}}
+\makeevenhead{headingsonly}{{\scshape \small \shorttitle}}{}{{\scshape \small \shortauthors}}
+\makeoddfoot{headingsonly}{}{}{}
+\makeevenfoot{headingsonly}{}{}{}
+
 \copypagestyle{emptyletter}{letter}
 \makeoddhead{emptyletter}{}{}{}
 \makeevenhead{emptyletter}{}{}{}
@@ -138,3 +144,15 @@
      \vfill
 }}} %
 \makeatother
+
+\makechapterstyle{proposal}{%
+  \renewcommand{\chapterheadstart}{} 
+  \renewcommand{\printchaptername}{} 
+  \renewcommand{\chapternamenum}{} 
+  \renewcommand{\printchapternum}{} 
+  \renewcommand{\afterchapternum}{} 
+  \renewcommand{\printchaptertitle}[1]{%
+    \Large\scshape\MakeUppercase{##1}
+  } 
+  \renewcommand{\afterchaptertitle}{\vspace{0.5\onelineskip} \hrule \vspace{0.5\onelineskip}}
+} 
