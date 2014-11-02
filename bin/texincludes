@@ -72,11 +72,8 @@ for f in files:
     input_files.append(toprocess.pop(0))
   
   all_files = input_files
-  """
-  if docitations and not nobibtexs[f]:
-    all_files.append(fbasename + ".blg")
-  """
   all_files.extend(graphic_files) 
+  all_files.extend(bib_files)
   for file in args[1:]:
     all_files.append(file)
   allnames.append(fbasename)
