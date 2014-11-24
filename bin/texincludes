@@ -93,8 +93,7 @@ for f in files:
     print >>output, "\tpdflatex -shell-escape %s" % (f)
   tex_files = [all_file for all_file in all_files if all_file.endswith(".tex")]
   print >>output, "spell-%s : %s" % (fbasename, " ".join(tex_files),)
-  for tex_file in tex_files:
-    print >>output, "\taspell -t check %s" % (tex_file,)
+  print >>output, "\tispell %s" % (" ".join(tex_files),)
     
 print >>outfile, output.getvalue(),
 print >>outfile, "PDFS = %s" % (" ".join([n + ".pdf" for n in allnames]))
