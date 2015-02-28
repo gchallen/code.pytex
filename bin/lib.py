@@ -26,6 +26,8 @@ def clean(inlines):
   inlines = sciwinet_macro.sub("SciWiNet", inlines)
   composite_macro = re.compile(r"\\ComPoSiTe{}", re.M)
   inlines = composite_macro.sub("ComPoSiTe", inlines)
+  agiledroid_macro = re.compile(r"\\AG{}", re.M)
+  inlines = agiledroid_macro.sub("AgileDroid", inlines)
   wifi_macro = re.compile(r"\\wifi{}", re.M)
   inlines = wifi_macro.sub("Wifi", inlines)
   keep_together = re.compile(r"~", re.M)
