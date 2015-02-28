@@ -77,7 +77,9 @@ for f in files:
   for file in args[1:]:
     all_files.append(file)
   allnames.append(fbasename)
-
+  
+  tex_files = [all_file for all_file in all_files if all_file.endswith(".tex")]
+  print >>output, "%s_TEXFILES=%s" % (fbasename.upper(), " ".join(tex_files),)
   print >>output, "%s : LOG := %s.log" % (fbasename, fbasename)
   print >>output, "%s : PDF := %s.pdf" % (fbasename, fbasename)
   print >>output, "%s : $(START) %s.pdf $(END)" % (fbasename, fbasename)
@@ -91,7 +93,6 @@ for f in files:
   else:
     print >>output, "\tpdflatex -shell-escape %s" % (f)
     print >>output, "\tpdflatex -shell-escape %s" % (f)
-  tex_files = [all_file for all_file in all_files if all_file.endswith(".tex")]
   print >>output, "spell-%s : %s" % (fbasename, " ".join(tex_files),)
   print >>output, "\tispell %s" % (" ".join(tex_files),)
     
