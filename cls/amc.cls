@@ -84,3 +84,62 @@
   \renewcommand{\afterchaptertitle}{}
 } 
 \chapterstyle{amc}
+\copypagestyle{headandfoot}{plain}
+
+\def\firstpageheader#1#2#3{%
+  \def\@lhead{#1}%
+  \def\@chead{#2}%
+  \def\@rhead{#3}%
+}
+
+\def\runningheader#1#2#3{%
+  \def\run@lhead{#1}%
+  \def\run@chead{#2}%
+  \def\run@rhead{#3}%
+}
+
+\def\header#1#2#3{%
+  \firstpageheader{#1}{#2}{#3}%
+  \runningheader{#1}{#2}{#3}%
+}
+
+\def\firstpagefooter#1#2#3{%
+  \def\@lfoot{#1}%
+  \def\@cfoot{#2}%
+  \def\@rfoot{#3}%
+}
+
+\def\runningfooter#1#2#3{%
+  \def\run@lfoot{#1}%
+  \def\run@cfoot{#2}%
+  \def\run@rfoot{#3}%
+}
+
+\def\footer#1#2#3{%
+  \firstpagefooter{#1}{#2}{#3}%
+  \runningfooter{#1}{#2}{#3}%
+}
+
+\def\lhead{\@ifnextchar[{\@xlhead}{\@ylhead}}
+\def\@xlhead[#1]#2{\def\@lhead{#1}\def\run@lhead{#2}}
+\def\@ylhead#1{\def\run@lhead{#1}\def\@lhead{#1}}
+
+\def\chead{\@ifnextchar[{\@xchead}{\@ychead}}
+\def\@xchead[#1]#2{\def\@chead{#1}\def\run@chead{#2}}
+\def\@ychead#1{\def\run@chead{#1}\def\@chead{#1}}
+
+\def\rhead{\@ifnextchar[{\@xrhead}{\@yrhead}}
+\def\@xrhead[#1]#2{\def\@rhead{#1}\def\run@rhead{#2}}
+\def\@yrhead#1{\def\run@rhead{#1}\def\@rhead{#1}}
+
+\def\lfoot{\@ifnextchar[{\@xlfoot}{\@ylfoot}}
+\def\@xlfoot[#1]#2{\def\@lfoot{#1}\def\run@lfoot{#2}}
+\def\@ylfoot#1{\def\run@lfoot{#1}\def\@lfoot{#1}}
+
+\def\cfoot{\@ifnextchar[{\@xcfoot}{\@ycfoot}}
+\def\@xcfoot[#1]#2{\def\@cfoot{#1}\def\run@cfoot{#2}}
+\def\@ycfoot#1{\def\run@cfoot{#1}\def\@cfoot{#1}}
+
+\def\rfoot{\@ifnextchar[{\@xrfoot}{\@yrfoot}}
+\def\@xrfoot[#1]#2{\def\@rfoot{#1}\def\run@rfoot{#2}}
+\def\@yrfoot#1{\def\run@rfoot{#1}\def\@rfoot{#1}}
