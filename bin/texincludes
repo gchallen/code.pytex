@@ -45,30 +45,38 @@ for f in files:
   while len(toprocess) > 0:
     try:
       lines = open(toprocess[0], "r").read()
-      if nobibtex.search(lines):
-        nobibtexs[toprocess[0]] = True
+    except IOError:
+      toprocess.pop(0)
+      continue
+    if nobibtex.search(lines):
+      nobibtexs[toprocess[0]] = True
+    else:
+      nobibtexs[toprocess[0]] = False
+    if len(citations.findall(lines)) > 0:
+      docitations = True
+    orig_inputs = inputs.findall(lines)
+    real_inputs = []
+    for possible_input in orig_inputs:
+      if possible_input[0] != '.' and os.path.splitext(possible_input)[1] == '':
+        possible_input += '.tex'
+      real_inputs.append(possible_input)
+      print toprocess[0], real_inputs
+    toprocess += real_inputs
+    b = bibs.finditer(lines)
+    for m in b:
+      allbibs = m.group(1).split(",")
+      for bib in allbibs:
+        bib_files.append(bib + ".bib")
+    g = graphics.finditer(lines)
+    for m in g:
+      if withpdf.match(m.group(2)):
+        graphic_files.append(m.group(2))
       else:
-        nobibtexs[toprocess[0]] = False
-      if len(citations.findall(lines)) > 0:
-        docitations = True
-      toprocess += inputs.findall(lines)
-      b = bibs.finditer(lines)
-      for m in b:
-        allbibs = m.group(1).split(",")
-        for bib in allbibs:
-          bib_files.append(bib + ".bib")
-      g = graphics.finditer(lines)
-      for m in g:
-        if withpdf.match(m.group(2)):
-          graphic_files.append(m.group(2))
+        path, ext = os.path.splitext(m.group(2))
+        if ext == '':
+          graphic_files.append(path + ".pdf")
         else:
-          path, ext = os.splitext(m.group(2))
-          if ext == '':
-            graphic_files.append(path + ".pdf")
-          else:
-            graphic_files.append(m.group(2))
-    except:
-      True
+          graphic_files.append(m.group(2))
     input_files.append(toprocess.pop(0))
   
   all_files = input_files
