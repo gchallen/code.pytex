@@ -595,6 +595,7 @@
 \nonzeroparskip
 \setlength{\parindent}{0pt}
 \renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\thefigure}{\arabic{figure}}
 
 %                         *****************
 %                         ** PAGE LAYOUT **
