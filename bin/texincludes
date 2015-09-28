@@ -60,7 +60,6 @@ for f in files:
       if possible_input[0] != '.' and os.path.splitext(possible_input)[1] == '':
         possible_input += '.tex'
       real_inputs.append(possible_input)
-      print toprocess[0], real_inputs
     toprocess += real_inputs
     b = bibs.finditer(lines)
     for m in b:
