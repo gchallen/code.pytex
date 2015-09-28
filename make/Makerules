@@ -23,7 +23,7 @@ allclean: rulesclean
 	@/bin/rm -f .deps
 	
 rulesclean:
-	@/bin/rm -f *.dvi *.aux *.ps *~ *.log *.lot *.lof *.toc *.blg *.bbl url.sty *.out *.bak $(PDFS)
+	@/bin/rm -f *.dvi *.aux *.ps *~ *.log *.lot *.lof *.toc *.blg *.bbl url.sty *.out *.bak *.pyg $(PDFS)
 
 # 16 Nov 2010 : GWA : Special dummy targets below.
 

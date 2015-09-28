@@ -2,8 +2,10 @@ import re
 
 def clean(inlines):
   
-  removecomments = re.compile(r"^(%.*)$", re.M)
+  removecomments = re.compile(r"(^%.*\n?)", re.M)
   inlines = removecomments.sub("", inlines)
+  collapsespaces = re.compile(r"(?:%\s*)+", re.M)
+  inlines = collapsespaces.sub("", inlines)
   fixpercents = re.compile(r"\\%", re.M)
   inlines = fixpercents.sub("%", inlines)
   removetex = re.compile(r"~?\\(((sub)*)section(\*?)|cite|chapter|thispagestyle)\*+\{([^\}]+)\}", re.M)
@@ -36,7 +38,10 @@ def clean(inlines):
   inlines = en_dashes.sub(u"\\1\u2013\\2", inlines)
   em_dashes = re.compile(r"([^-])---([^-])", re.M)
   inlines = em_dashes.sub(u"\\1\u2014\\2", inlines)
+  spaces = re.compile(r"(?:\\space|\\;|\\:)+")
+  inlines = spaces.sub(" ", inlines)
   enum = re.compile(r"\\begin\{enumerate\}(.*?)\\end\{enumerate\}", re.S | re.M)
+
 
   class Counter:
     def __init__(self):
@@ -61,6 +66,7 @@ def clean(inlines):
   inlines = removeflushenumbf.sub(r"\1", inlines)
   removebeginabstract = re.compile(r"\\begin\{abstract\}\s+(.*?)\s+\\end\{abstract\}", re.S | re.M)
   inlines = removebeginabstract.sub(r"\1", inlines)
+  inlines = inlines.strip()
 
   lines = re.split(r'\s{2,}', inlines)
 

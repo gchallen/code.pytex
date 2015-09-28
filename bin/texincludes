@@ -19,7 +19,7 @@ outfile = tempfile.NamedTemporaryFile(delete=False)
 docfile = re.compile(r"""(?m)^(?!\s*%).*\\begin\{document\}""")
 inputs = re.compile(r"""(?m)^(?!\s*%).*\\input{(.*)}""")
 bibs = re.compile(r"""(?m)^(?!\s*%).*\\bibliography\{(.*)\}""")
-citations = re.compile(r"""^(?m)^(?!\s*%).*\\(?:no)?cite""")
+citations = re.compile(r"""^(?m)^(?!\s*%).*\\(?:no|n)?cite""")
 graphics = re.compile(r"""(?m)^(?!\s*%).*\\includegraphics(\[.*?\])?\{(.*?)\}""")
 withpdf = re.compile(r"^.*\.pdf$")
 nobibtex = re.compile(r"""(?m)^% !NOBIBTEX!""")
@@ -71,11 +71,27 @@ for f in files:
       if withpdf.match(m.group(2)):
         graphic_files.append(m.group(2))
       else:
-        path, ext = os.path.splitext(m.group(2))
-        if ext == '':
-          graphic_files.append(path + ".pdf")
-        else:
+        nobibtexs[toprocess[0]] = False
+        if len(citations.findall(lines)) > 0:
+          docitations = True
+      toprocess += inputs.findall(lines)
+      b = bibs.finditer(lines)
+      for m in b:
+        allbibs = m.group(1).split(",")
+        for bib in allbibs:
+          bib_files.append(bib + ".bib")
+      g = graphics.finditer(lines)
+      for m in g:
+        if withpdf.match(m.group(2)):
           graphic_files.append(m.group(2))
+        else:
+          path, ext = os.path.splitext(m.group(2))
+          if ext == '':
+            graphic_files.append(path + ".pdf")
+          else:
+            graphic_files.append(m.group(2))
+    except Exception, e:
+      pass
     input_files.append(toprocess.pop(0))
   
   all_files = input_files
@@ -93,21 +109,20 @@ for f in files:
   print >>output, "%s.ps : %s.pdf" % (fbasename, fbasename)
   print >>output, "%s.pdf %s.blg : .deps %s" % (fbasename, fbasename, " ".join(all_files))
   if docitations and not nobibtexs[f]:
-    print >>output, "\tpdflatex -shell-escape %s" % (f)
+    print >>output, "\txelatex -shell-escape %s" % (f)
     print >>output, "\tbibtex %s"  % (fbasename)
-    print >>output, "\tpdflatex -shell-escape %s" % (f)
-    print >>output, "\tpdflatex -shell-escape %s" % (f)
+    print >>output, "\txelatex -shell-escape %s" % (f)
+    print >>output, "\txelatex -shell-escape %s" % (f)
   else:
-    print >>output, "\tpdflatex -shell-escape %s" % (f)
-    print >>output, "\tpdflatex -shell-escape %s" % (f)
+    print >>output, "\txelatex -shell-escape %s" % (f)
+    print >>output, "\txelatex -shell-escape %s" % (f)
   print >>output, "spell-%s : %s" % (fbasename, " ".join(tex_files),)
-  print >>output, "\tispell %s" % (" ".join(tex_files),)
+  print >>output, "\t@hunspell -t -l -p $(PWD)/.okwords %s | sort -f | uniq" % (" ".join(tex_files),)
+  print >>output, "open-%s : %s" % (fbasename, " ".join(tex_files),)
+  print >>output, "\t@$(PYTEXOPEN) %s.pdf 1>/dev/null 2>/dev/null &" % (fbasename,)
     
 print >>outfile, output.getvalue(),
 print >>outfile, "PDFS = %s" % (" ".join([n + ".pdf" for n in allnames]))
 outfile.close()
 
-if not os.path.exists(args[0]) or not filecmp.cmp(outfile.name, args[0], shallow=False):
-  shutil.move(outfile.name, args[0])
-else:
-  os.unlink(outfile.name)
+shutil.move(outfile.name, args[0])
