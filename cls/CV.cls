@@ -73,7 +73,7 @@
 \newcommand{\pdf}[1]{\href{#1}{\scriptsize\textsc{[pdf]}}}
 \newcommand{\doi}[1]{\href{#1}{\scriptsize\textsc{[doi]}}}
 
-\newcommand{\years}[1]{\sidepar{\small #1}}
+\newcommand{\years}[1]{\sidepar{\vspace*{-0.09in}\color{black}\footnotesize#1}}
 \setlength{\marginparsep}{0.2in}
 \reversemarginpar
 
