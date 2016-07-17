@@ -27,6 +27,11 @@ rulesclean:
 
 # 16 Nov 2010 : GWA : Special dummy targets below.
 
+# 17 Jul 2016 : GWA : Fix first build.
+
+.xxxnote:
+	@touch .xxxnote
+
 xxxnote:
 	@echo "\\newcommand{\\XXXnote}[1]{\\textcolor{red}{\\bfseries XXX: #1}}" > .xxxnote-new
 	@if [ -n "`diff -N 2>/dev/null .xxxnote .xxxnote-new`" ]; then\
