@@ -102,4 +102,5 @@ print >>outfile, output.getvalue(),
 print >>outfile, "PDFS = %s" % (" ".join([n + ".pdf" for n in allnames]))
 outfile.close()
 
-shutil.move(outfile.name, args[0])
+if not os.path.isfile(args[0]) or not filecmp.cmp(outfile.name, args[0]):
+  shutil.move(outfile.name, args[0])
