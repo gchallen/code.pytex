@@ -87,13 +87,13 @@
 \noindent\begin{minipage}[t]{\lefttitle}
 \vspace{0pt}
 \raggedright
-\LARGE\scshape\MakeUppercase{##1}\\
-{\Large\theauthors}
+\LARGE\scshape\href{\thechapterlink}{\MakeUppercase{##1}}\\
+{\Large\href{https://blue.cse.buffalo.edu/people/gwa/}{Geoffrey Challen}}
 \end{minipage}%
 \begin{minipage}[t]{\righttitle}
 \vspace{0pt}
 \raggedleft
-\includegraphics[width=0.6in]{./figures/blue.jpg}\\
+\href{https://blue.cse.buffalo.edu}{\XeTeXLinkBox{\includegraphics[width=0.6in]{./figures/blue.jpg}}}\\
 {\small\submissiondate}
 \end{minipage}
 }
