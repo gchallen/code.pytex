@@ -85,13 +85,13 @@
   \renewcommand{\afterchapternum}{} 
   \renewcommand{\printchaptertitle}[1]{
 \noindent\begin{minipage}[t]{\lefttitle}
-\vspace{0pt}
+\vspace{-0.1in}
 \raggedright
 \LARGE\scshape\MakeUppercase{##1}\\
 {\Large\theauthors}
 \end{minipage}%
 \begin{minipage}[t]{\righttitle}
-\vspace{0pt}
+\vspace{-0.1in}
 \raggedleft
 \includegraphics[width=0.6in]{./figures/blue.jpg}\\
 {\small\submissiondate}
