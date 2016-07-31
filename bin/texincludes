@@ -20,7 +20,7 @@ docfile = re.compile(r"""(?m)^(?!\s*%).*\\begin\{document\}""")
 inputs = re.compile(r"""(?m)^(?!\s*%).*\\input{(.*)}""")
 bibs = re.compile(r"""(?m)^(?!\s*%).*\\bibliography\{(.*)\}""")
 citations = re.compile(r"""^(?m)^(?!\s*%).*\\(?:no|n)?cite""")
-graphics = re.compile(r"""(?m)^(?!\s*%).*\\includegraphics(\[.*?\])?\{(.*?)\}""")
+graphics = re.compile(r"""(?m)^(?!\s*%).*\\includegraphics(\[.*?\])?\{(.*?)\}(?!.*?% IGNORE)""")
 withpdf = re.compile(r"^.*\.pdf$")
 nobibtex = re.compile(r"""(?m)^% !NOBIBTEX!""")
 
