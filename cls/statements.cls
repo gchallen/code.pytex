@@ -158,8 +158,8 @@
 %\addtopsmarks{whitepaper}{}{%
 %\nouppercaseheads
 %\createmark{chapter}{left}{nonumber}{}{}}
-\makeoddhead{whitepaper}{{\scshape \small \shorttitle}}{}{{\scshape \small \shortauthors}}
-\makeevenhead{whitepaper}{{\scshape \small \shorttitle}}{}{{\scshape \small \shortauthors}}
+\makeoddhead{whitepaper}{{\href{\thechapterlink}{\scshape \small \shorttitle}}}{}{{\href{https://blue.cse.buffalo.edu/people/gwa/}{\scshape \small \shortauthors}}}
+\makeevenhead{whitepaper}{{\href{\thechapterlink}{\scshape \small \shorttitle}}}{}{{\href{https://blue.cse.buffalo.edu/people/gwa/}{\scshape \small \shortauthors}}}
 \makeoddfoot{whitepaper}{}{\thepage}{}
 \makeevenfoot{whitepaper}{}{\thepage}{}
 
